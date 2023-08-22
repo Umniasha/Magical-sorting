@@ -9,80 +9,502 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
+
+    var gameViewController : GameViewController!
+    private var currentNode: SKNode?
+    var oldPosition : CGPoint!
+    var newPosition : CGPoint!
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
+    var backShelf = SKSpriteNode()
+    var objectArray = [SKSpriteNode]()
+    var pointArray = [Point]()
+    var gameObjectArray = [(String,String)]()
+    var cellArray = [SKSpriteNode]()
+    var objectSize = CGSize()
+    var objectCount = Int()
+    var isMoved = false
+    var gameTimer = Timer()
+    var gameTime = Int()
+    var sizeText = CGFloat()
+    var сoincidenceCount = Int()
+    
     
     override func didMove(to view: SKView) {
-        
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
+        scene?.size = UIScreen.main.bounds.size
+        if UIScreen.main.bounds.size.height > 800 {
+            sizeText = 20
+        } else {
+            sizeText = 12
         }
         
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
+        createShelf()
+        createBG()
+        objectSize = CGSize(width: backShelf.size.width / 11 , height: backShelf.size.height / 11)
+        objectCount = 44
+        createGameArray()
+        createObject()
+        createIsolate()
+        checkLocation()
+        checkEqual()
+        gameTime = 150
+        gameViewController.timerLable.titleLabel?.font =  UIFont(name: "BauhausITCbyBT-Heavy", size: sizeText)
+        gameViewController.timerLable.titleLabel?.text = String(gameTime)
+        gameViewController.timerLable.titleLabel?.textColor = .white
+        gameViewController.timerLable.titleLabel?.textAlignment = .center
+        сoincidenceCount = 0
         
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
+       
+    }
+    
+   
+    func frontObject()->[SKNode]{
+       
             
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
-        }
+            var noBackObjectArray = [SKNode]()
+            
+            for object in self.children {
+                for (key,_) in textureArray{
+                    if object.name == key{
+                        noBackObjectArray.append(object)
+                    }
+                }
+            
+            }
+            return noBackObjectArray
     }
     
     
-    func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
+    func backObject() ->[SKSpriteNode]{
+        var backObjectArray = [SKSpriteNode]()
+        
+        for  object in objectArray {
+            for (_,value) in textureArray{
+                if object.name == value{
+                    
+                    backObjectArray.append(object)
+                   
+                }
+            }
+        
         }
+        return backObjectArray
+        
+ 
     }
     
-    func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
+    
+    func checkEqual(){
+        
+        for cellArray in cellArray {
+            
+       var array = [SKNode]()
+       
+            for object in frontObject() {
+                
+                    if cellArray.contains(object.position) {
+                                array.append(object)
+
+                
+                }
+            }
+        
+                if array.count == 3 && array[0].name == array[1].name && array[1].name == array[2].name{
+                    self.сoincidenceCount += 1
+                    print(self.сoincidenceCount)
+                        for i in 0..<objectArray.count {
+                            if objectArray[i] == array[0] || objectArray[i] == array[1] || objectArray[i] == array[2]{
+                                   
+
+                                _ = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
+                                    self.objectArray[i].removeFromParent()
+                                    
+                                    
+                                }
+                        }
+                    }
+       
+                } else  if array.count == 0 {
+                    for BackObjectArray in backObject() {
+                                                 if cellArray.contains(BackObjectArray.position) && BackObjectArray.zPosition == 6.0{
+                                                 BackObjectArray.zPosition = 7
+                                                 var name = BackObjectArray.name
+                                            
+                                                 for (key,value) in textureArray{
+                                                     if value == name{
+                                                       
+                                                         BackObjectArray.name = key
+                                                         BackObjectArray.texture = SKTexture(imageNamed: key)
+                 
+                                                 }
+                                             }
+                                                 } else if cellArray.contains(BackObjectArray.position) && BackObjectArray.zPosition == 5.0{
+                                                     BackObjectArray.zPosition = 6
+                                                 }
+                                     }
+                    
+                }//
+            
         }
+        
     }
     
-    func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
+    
+   
+    
+
+    
+    override func update(_ currentTime: TimeInterval) {
+        if isMoved{
+
+            checkEqual()
+            _ = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { [self] _ in
+                checkEqual()
+            }
+            _ = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { [self] _ in
+                checkEqual()
+            }
+            isMoved = false
+        }
+        if gameTime == 0{
+            gameTimer.invalidate()
+        }
+        checkLocation()
+    }
+    
+    func checkLocation(){
+       
+        for i in pointArray.indices{
+            pointArray[i].isAnabled = false
+        }
+        
+       
+        
+        
+        for object in frontObject(){
+            for i in pointArray.indices{
+              
+                if Int(pointArray[i].point.x) == Int(object.position.x) &&
+                    Int(pointArray[i].point.y) == Int(object.position.y)  &&
+                    pointArray[i].isAnabled == false{
+                    
+                    pointArray[i].isAnabled = true
+                    
+                }
+                
+               
+            }
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
+
+        newPosition = nil
+        if let touch = touches.first {
+            let location = touch.location(in: self)
+            
+            let touchedNodes = self.nodes(at: location)
+            for node in touchedNodes.reversed() {
+                for object in frontObject() {
+                    if node.name == object.name {
+                        node.zPosition += 1
+                        self.currentNode = node
+                        oldPosition = node.position
+                        
+                        
+                        
+                       
+                    }
+                }
+            }
         }
-        
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+        //checkLocation()
+        if let touch = touches.first, let node = self.currentNode {
+            let touchLocation = touch.location(in: self)
+            node.position = touchLocation
+            
+           
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        
+       
+        if let node = self.currentNode{
+           pointArray.sort(by: {calculateDistance(object: node.position, point: $0.point) < calculateDistance(object: node.position, point: $1.point)})
+            var newArray = [Point]()
+            for i in pointArray.indices {
+                if pointArray[i].isAnabled == false {
+                    newArray.append(pointArray[i])
+                }
+            }
+          
+            if let point = newArray.first?.point{
+                if calculateDistance(object: node.position, point: point ) <= node.frame.size.width {
+                newPosition = newArray.first?.point
+                    if !gameTimer.isValid {
+                        gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {  _ in
+                            
+                            self.gameTime -= 1
+                            
+                            self.gameViewController.timerLable.titleLabel?.font =  UIFont(name: "BauhausITCbyBT-Heavy", size: self.sizeText)
+                            self.gameViewController.timerLable.titleLabel?.text = String(self.gameTime)
+                            self.gameViewController.timerLable.titleLabel?.textColor = .white
+                            self.gameViewController.timerLable.titleLabel?.textAlignment = .center
+                            
+                        }
+                    }
+                }
+            }
+
+            if let newPosition = newPosition{
+                
+               // checkEqual()
+               isMoved = true
+                node.position = newPosition
+                
+            
+            } else {
+                if let objectPosition = oldPosition{
+                    let timeDuration = CGFloat(sqrt((node.position.x - objectPosition.x) * (node.position.x - objectPosition.x) + (node.position.y - objectPosition.y) * (node.position.y - objectPosition.y)) / 500)
+                    node.run(SKAction.move(to: objectPosition, duration: timeDuration))
+           
+                }
+            }
+        }
+        self.currentNode = nil
+        
+        newPosition = nil
+        oldPosition = nil
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        checkLocation()
+        
+        self.currentNode = nil
+        if let node = currentNode{
+            
+        if let objectPosition = oldPosition{
+        let timeDuration = CGFloat(sqrt((node.position.x - objectPosition.x) * (node.position.x - objectPosition.x) + (node.position.y - objectPosition.y) * (node.position.y - objectPosition.y)) / 500)
+        node.run(SKAction.move(to: objectPosition, duration: timeDuration))
+            node.zPosition -= 1
+        }
+        }
+        newPosition = nil
+        oldPosition = nil
     }
     
+
+
     
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+    func calculateDistance(object: CGPoint, point: CGPoint) -> CGFloat{
+        var distance  = CGFloat()
+        distance = sqrt(((object.x - point.x) * (object.x - point.x)) + ((object.y - point.y) * (object.y - point.y)))
+        
+        return distance
+    }
+    
+    func createGameArray(){
+        var array = [(String,String)]()
+        for _ in 1...objectCount{
+            array.append(textureArray.randomElement()!)
+        }
+         gameObjectArray = array + array + array
+      
+    }
+
+    func createObject(){
+      
+        var array = pointArray.shuffled()
+        print(array.count)
+            if gameObjectArray.count <= 42 {
+                for (key,_) in gameObjectArray{
+                objectArray.append(Objects(name: key,
+                                       size: objectSize,
+                                       position: array.removeFirst().point,
+                                 zPosition: 7).createNode())
+                }
+            } else if gameObjectArray.count > 42 && gameObjectArray.count <= 87 {
+                array.removeAll()
+                array = pointArray.shuffled()
+                for i in 0..<42{
+                    objectArray.append(Objects(name: gameObjectArray[i].0,
+                                       size: objectSize,
+                                       position: array.removeFirst().point,
+                                 zPosition: 7).createNode())
+            }
+                array.removeAll()
+                array = pointArray.shuffled()
+                for i in 42..<gameObjectArray.count {
+                    objectArray.append(Objects(name: gameObjectArray[i].1,
+                                           size: objectSize,
+                                           position: array.removeFirst().point,
+                                     zPosition: 6).createNode())
+                }
+            
+            } else if gameObjectArray.count > 87 && gameObjectArray.count <= 132{
+                
+                array.removeAll()
+                array = pointArray.shuffled()
+                    for i in 0..<42{
+                        objectArray.append(Objects(name: gameObjectArray[i].0,
+                                       size: objectSize,
+                                       position: array.removeFirst().point,
+                                 zPosition: 7).createNode())
+                    }
+                
+                array.removeAll()
+                print("point \(pointArray.count)")
+                array = pointArray.shuffled()
+                    for i in 42..<87 {
+                        objectArray.append(Objects(name: gameObjectArray[i].1,
+                                           size: objectSize,
+                                           position: array.removeFirst().point,
+                                     zPosition: 6).createNode())
+                    }
+                
+                array.removeAll()
+                array = pointArray.shuffled()
+                    for i in 87..<gameObjectArray.count {
+                        objectArray.append(Objects(name: gameObjectArray[i].1,
+                                           size: objectSize,
+                                           position: array.removeFirst().point,
+                                     zPosition: 5).createNode())
+                    }
+            
+            }
+        
+        
+       
+        for object in objectArray {
+            addChild(object)
+        }
+
+        print(objectArray.count)
+    }
+    
+    func createIsolate(){
+        let isolation = SKSpriteNode(imageNamed: "isolation")
+        isolation.size = cellArray[0].size
+        isolation.name = "isolation"
+        isolation.position = cellArray[2].position
+        isolation.zPosition = 10
+        addChild(isolation)
+    }
+    
+   
+    
+    func createShelf(){
+        backShelf = SKSpriteNode(imageNamed: "backShelf")
+        backShelf.size = CGSize(width: self.scene!.frame.size.width, height: self.scene!.frame.size.height / 1.8)
+        backShelf.zPosition = 0
+        addChild(backShelf)
+        
+
+        var horyzontalSticks = [SKSpriteNode]()
+        for _ in 1...5{
+        let hStick = SKSpriteNode(imageNamed: "horizontalStick")
+        hStick.size = CGSize(width: backShelf.size.width, height: backShelf.size.width / 24)
+            hStick.position.y = backShelf.frame.maxY  - hStick.size.height
+        hStick.zPosition = 3
+        horyzontalSticks.append(hStick)
+        }
+        var yPos = backShelf.frame.maxY  - backShelf.size.height / 5
+        for stick in horyzontalSticks {
+            stick.position.y = yPos
+            addChild(stick)
+            yPos -=  backShelf.size.height / 5
+        }
+        
+        
+        var verticalSticks = [SKSpriteNode]()
+        for _ in 1...4{
+        let vStick = SKSpriteNode(imageNamed: "verticalStick")
+            vStick.size = CGSize(width: backShelf.size.width / 20, height: backShelf.size.height)
+            vStick.position.y = backShelf.position.y
+            vStick.zPosition = 2
+            verticalSticks.append(vStick)
+        }
+        var xPos = backShelf.frame.minX
+        for stick in verticalSticks {
+            stick.position.x = xPos
+            addChild(stick)
+            xPos +=  backShelf.size.width / 3
+        }
+        
+       var name = 1
+        for _ in 1...15{
+        let shadowPlate = SKSpriteNode(imageNamed: "shadow")
+            shadowPlate.name = String(name)
+            shadowPlate.size = CGSize(width: backShelf.size.width / 3, height: backShelf.size.height / 5)
+            shadowPlate.zPosition = 1
+            cellArray.append(shadowPlate)
+            name += 1
+        }
+        var shadowPos = CGPoint(x: backShelf.frame.minX + backShelf.size.width / 6, y: backShelf.frame.minY + backShelf.size.height / 10 )
+        for i in 0...4{
+            cellArray[i].position = shadowPos
+            addChild(cellArray[i])
+            let point = Point(point: CGPoint(x: cellArray[i].position.x - (cellArray[i].size.width / 3.5) , y: cellArray[i].position.y - cellArray[i].size.height / 5), isAnabled: false)
+            let point1 = Point(point: CGPoint(x: cellArray[i].position.x  , y: cellArray[i].position.y - cellArray[i].size.height / 5), isAnabled: false)
+            let point2 = Point(point: CGPoint(x: cellArray[i].position.x + (cellArray[i].size.width / 3.5) , y: cellArray[i].position.y - cellArray[i].size.height / 5), isAnabled: false)
+            pointArray.append(point)
+            pointArray.append(point1)
+            pointArray.append(point2)
+            shadowPos.y += backShelf.size.height / 5
+        }
+        
+        shadowPos = CGPoint(x: backShelf.frame.midX, y: backShelf.frame.minY + backShelf.size.height / 10 )
+        for i in 5...9{
+            cellArray[i].position = shadowPos
+            addChild(cellArray[i])
+            let point = Point(point: CGPoint(x: cellArray[i].position.x - (cellArray[i].size.width / 3.5) , y: cellArray[i].position.y - cellArray[i].size.height / 5), isAnabled: false)
+            let point1 = Point(point: CGPoint(x: cellArray[i].position.x  , y: cellArray[i].position.y - cellArray[i].size.height / 5), isAnabled: false)
+            let point2 = Point(point: CGPoint(x: cellArray[i].position.x + (cellArray[i].size.width / 3.5) , y: cellArray[i].position.y - cellArray[i].size.height / 5), isAnabled: false)
+            pointArray.append(point)
+            pointArray.append(point1)
+            pointArray.append(point2)
+            shadowPos.y += backShelf.size.height / 5
+        }
+        
+        shadowPos = CGPoint(x: backShelf.frame.maxX - backShelf.size.width / 6 , y: backShelf.frame.minY + backShelf.size.height / 10 )
+        for i in 10...14{
+            cellArray[i].position = shadowPos
+            addChild(cellArray[i])
+            let point = Point(point: CGPoint(x: cellArray[i].position.x - (cellArray[i].size.width / 3.5) , y: cellArray[i].position.y - cellArray[i].size.height / 5), isAnabled: false)
+            let point1 = Point(point: CGPoint(x: cellArray[i].position.x  , y: cellArray[i].position.y - cellArray[i].size.height / 5), isAnabled: false)
+            let point2 = Point(point: CGPoint(x: cellArray[i].position.x + (cellArray[i].size.width / 3.5) , y: cellArray[i].position.y - cellArray[i].size.height / 5), isAnabled: false)
+            pointArray.append(point)
+            pointArray.append(point1)
+            pointArray.append(point2)
+            shadowPos.y += backShelf.size.height / 5
+        }
+        
+        
+        let topShelf = SKSpriteNode(imageNamed: "topShelf")
+        topShelf.size = CGSize(width: backShelf.size.width, height: backShelf.size.width / 8)
+        topShelf.position.y = backShelf.frame.maxY
+        topShelf.zPosition = 3
+        addChild(topShelf)
+        
+        let stars = SKSpriteNode(imageNamed: "stars")
+        stars.size = CGSize(width: topShelf.size.width / 1.4, height: topShelf.size.height)
+        stars.position.y = topShelf.frame.maxY  + topShelf.size.height / 1.8
+        addChild(stars)
+        
+   
+    }
+    
+
+    
+    func createBG(){
+        let backGround = SKSpriteNode(imageNamed: "bg")
+        backGround.size = self.scene!.frame.size
+        backGround.name = "bg"
+        backGround.zPosition = -1
+        addChild(backGround)
+        
     }
 }

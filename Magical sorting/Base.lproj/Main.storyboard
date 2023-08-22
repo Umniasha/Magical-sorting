@@ -1,24 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="Magical_sorting" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O94-lD-RH5">
+                                <rect key="frame" x="30" y="54" width="39" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="O94-lD-RH5" secondAttribute="height" multiplier="1:1.15" id="ckJ-lL-oap"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <backgroundConfiguration key="background" image="home"/>
+                                </buttonConfiguration>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eg5-1D-bwa">
+                                <rect key="frame" x="319" y="54" width="75" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="eg5-1D-bwa" secondAttribute="height" multiplier="1.5:1" id="fmK-3i-RdX"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <backgroundConfiguration key="background" image="crystal"/>
+                                </buttonConfiguration>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ar-Sa-y0Z">
+                                <rect key="frame" x="0.0" y="717" width="112.5" height="179"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="5Ar-Sa-y0Z" secondAttribute="height" multiplier="1:1.59" id="U2U-A6-GN7"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <backgroundConfiguration key="background" image="magic"/>
+                                </buttonConfiguration>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDB-1f-iZT">
+                                <rect key="frame" x="173.5" y="54" width="67" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="HDB-1f-iZT" secondAttribute="height" multiplier="1:1" constant="5" id="hFy-aT-szW"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <backgroundConfiguration key="background" image="timer"/>
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="324">
+                                            <attributes>
+                                                <font key="NSFont" size="11" name="BauhausITCbyBT-Heavy"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="5Ar-Sa-y0Z" secondAttribute="bottom" id="3cw-Rg-Eem"/>
+                            <constraint firstItem="HDB-1f-iZT" firstAttribute="height" secondItem="3se-qz-xqx" secondAttribute="height" multiplier="0.0647321" constant="3.9999999999999929" id="3m0-pf-j0R"/>
+                            <constraint firstItem="eg5-1D-bwa" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="10" id="5Yc-ID-mv3"/>
+                            <constraint firstItem="HDB-1f-iZT" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="10" id="Awf-5f-eGf"/>
+                            <constraint firstItem="O94-lD-RH5" firstAttribute="height" secondItem="HDB-1f-iZT" secondAttribute="height" multiplier="0.775862" constant="-3.1034482758620712" id="H7x-HK-tu9"/>
+                            <constraint firstItem="eg5-1D-bwa" firstAttribute="height" secondItem="HDB-1f-iZT" secondAttribute="height" multiplier="0.862069" constant="-3.4482758620689609" id="Kht-EE-Sni"/>
+                            <constraint firstItem="O94-lD-RH5" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" constant="30" id="NaT-NG-FiP"/>
+                            <constraint firstItem="O94-lD-RH5" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="10" id="SVC-uC-Y5l"/>
+                            <constraint firstItem="5Ar-Sa-y0Z" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="Uaq-my-7yJ"/>
+                            <constraint firstItem="HDB-1f-iZT" firstAttribute="centerX" secondItem="4qk-I5-YsI" secondAttribute="centerX" id="XSs-SH-Qlp"/>
+                            <constraint firstItem="5Ar-Sa-y0Z" firstAttribute="height" secondItem="3se-qz-xqx" secondAttribute="height" multiplier="1:5" id="omt-iu-EE3"/>
+                            <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="eg5-1D-bwa" secondAttribute="trailing" constant="20" id="wc7-Az-a89"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="timerLable" destination="HDB-1f-iZT" id="abY-PM-u0l"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-23.188405797101453" y="58.928571428571423"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="crystal" width="75" height="50"/>
+        <image name="home" width="40" height="46"/>
+        <image name="magic" width="106" height="167"/>
+        <image name="timer" width="58" height="58"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
