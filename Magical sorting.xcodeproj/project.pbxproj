@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B1966002A95440400606CA4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1965FF2A95440400606CA4 /* MainViewController.swift */; };
+		6B1966022A9549B000606CA4 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1966012A9549B000606CA4 /* AboutViewController.swift */; };
+		6B1966042A954CB400606CA4 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1966032A954CB400606CA4 /* ShopViewController.swift */; };
 		6B1FAA802A9246EA00772ADE /* TextureForObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1FAA7F2A9246EA00772ADE /* TextureForObjects.swift */; };
 		6B1FAA822A94EA6300772ADE /* ITC Bauhaus Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B1FAA812A94EA6300772ADE /* ITC Bauhaus Heavy.ttf */; };
 		6B1FAA872A95003900772ADE /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1FAA862A95003900772ADE /* Level.swift */; };
@@ -23,6 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B1965FF2A95440400606CA4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		6B1966012A9549B000606CA4 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		6B1966032A954CB400606CA4 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		6B1FAA7F2A9246EA00772ADE /* TextureForObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureForObjects.swift; sourceTree = "<group>"; };
 		6B1FAA812A94EA6300772ADE /* ITC Bauhaus Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ITC Bauhaus Heavy.ttf"; sourceTree = "<group>"; };
 		6B1FAA832A94ECD500772ADE /* Magical-sorting-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Magical-sorting-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -80,7 +86,10 @@
 				6B1FAA862A95003900772ADE /* Level.swift */,
 				6B1FAA7F2A9246EA00772ADE /* TextureForObjects.swift */,
 				6B6FC6892A8BAA3100868330 /* GameViewController.swift */,
+				6B1966032A954CB400606CA4 /* ShopViewController.swift */,
 				6B6FC68B2A8BAA3100868330 /* Main.storyboard */,
+				6B1966012A9549B000606CA4 /* AboutViewController.swift */,
+				6B1965FF2A95440400606CA4 /* MainViewController.swift */,
 				6B6FC68E2A8BAA3500868330 /* Assets.xcassets */,
 				6B6FC6902A8BAA3500868330 /* LaunchScreen.storyboard */,
 				6B1FAA812A94EA6300772ADE /* ITC Bauhaus Heavy.ttf */,
@@ -164,11 +173,14 @@
 			files = (
 				6B1FAA802A9246EA00772ADE /* TextureForObjects.swift in Sources */,
 				6B1FAA872A95003900772ADE /* Level.swift in Sources */,
+				6B1966042A954CB400606CA4 /* ShopViewController.swift in Sources */,
 				6B6FC6882A8BAA3100868330 /* GameScene.swift in Sources */,
+				6B1966022A9549B000606CA4 /* AboutViewController.swift in Sources */,
 				6B6FC68A2A8BAA3100868330 /* GameViewController.swift in Sources */,
 				6B3181702A8F59CF006B5227 /* Objects.swift in Sources */,
 				6B6FC6822A8BAA3100868330 /* AppDelegate.swift in Sources */,
 				6B31818E2A90EDAA006B5227 /* points.swift in Sources */,
+				6B1966002A95440400606CA4 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

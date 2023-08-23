@@ -27,6 +27,8 @@ class GameScene: SKScene {
     var gameTime = Int()
     var sizeText = CGFloat()
     var сoincidenceCount = Int()
+    var isolateArray = [SKSpriteNode]()
+    var isolateCount = Int()
     
     
     override func didMove(to view: SKView) {
@@ -43,7 +45,7 @@ class GameScene: SKScene {
         objectCount = 44
         createGameArray()
         createObject()
-        createIsolate()
+        
         checkLocation()
         checkEqual()
         gameTime = 150
@@ -51,11 +53,26 @@ class GameScene: SKScene {
         gameViewController.timerLable.titleLabel?.text = String(gameTime)
         gameViewController.timerLable.titleLabel?.textColor = .white
         gameViewController.timerLable.titleLabel?.textAlignment = .center
-        сoincidenceCount = 0
-        
+        сoincidenceCount = 3
+        isolateCount = 3
+        createIsolate()
        
+      
+   
     }
     
+    func removeIsolation(){
+        var array = isolateArray
+        for isolate in array {
+           
+            if сoincidenceCount == 0 && isolate.name != nil{
+                print(777)
+                isolate.removeFromParent()
+                isolate.name = nil
+                сoincidenceCount = 3
+            }
+        }
+    }
    
     func frontObject()->[SKNode]{
        
@@ -93,8 +110,8 @@ class GameScene: SKScene {
     }
     
     
-    func checkEqual(){
-        
+    func checkEqual()->[CGPoint]{
+        var fullCell = [CGPoint]()
         for cellArray in cellArray {
             
        var array = [SKNode]()
@@ -109,8 +126,8 @@ class GameScene: SKScene {
             }
         
                 if array.count == 3 && array[0].name == array[1].name && array[1].name == array[2].name{
-                    self.сoincidenceCount += 1
-                    print(self.сoincidenceCount)
+                    self.сoincidenceCount -= 1
+                    print(сoincidenceCount)
                         for i in 0..<objectArray.count {
                             if objectArray[i] == array[0] || objectArray[i] == array[1] || objectArray[i] == array[2]{
                                    
@@ -120,14 +137,14 @@ class GameScene: SKScene {
                                     
                                     
                                 }
-                        }
+                            }
                     }
        
                 } else  if array.count == 0 {
                     for BackObjectArray in backObject() {
                                                  if cellArray.contains(BackObjectArray.position) && BackObjectArray.zPosition == 6.0{
                                                  BackObjectArray.zPosition = 7
-                                                 var name = BackObjectArray.name
+                                                     let name = BackObjectArray.name
                                             
                                                  for (key,value) in textureArray{
                                                      if value == name{
@@ -142,10 +159,16 @@ class GameScene: SKScene {
                                                  }
                                      }
                     
-                }//
+                }else if array.count == 3 {
+                    
+                       fullCell.append(cellArray.position)
+                   
+                }
             
         }
         
+        return fullCell
+       
     }
     
     
@@ -169,7 +192,10 @@ class GameScene: SKScene {
             gameTimer.invalidate()
         }
         checkLocation()
+        removeIsolation()
     }
+    
+    
     
     func checkLocation(){
        
@@ -195,26 +221,73 @@ class GameScene: SKScene {
             }
         }
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-        newPosition = nil
-        if let touch = touches.first {
-            let location = touch.location(in: self)
-            
-            let touchedNodes = self.nodes(at: location)
-            for node in touchedNodes.reversed() {
-                for object in frontObject() {
-                    if node.name == object.name {
-                        node.zPosition += 1
-                        self.currentNode = node
-                        oldPosition = node.position
+    func chekIsolate()->[SKSpriteNode]{
+        var array = [SKSpriteNode]()
+        for cellArray in cellArray {
+            if let scene = scene{
+            for object in scene.children{
+                if cellArray.contains(object.position){
+                    if object.name == "isolation"{
                         
-                        
-                        
-                       
+                        array.append(cellArray)
                     }
                 }
+            }
+        }
+        }
+        return array
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let array = chekIsolate()
+       
+        newPosition = nil
+        var location : CGPoint!
+        if let touch = touches.first {
+           
+            if array.isEmpty{
+                location = touch.location(in: self)
+          
+            } else  if !array.isEmpty{
+                var notPosition = SKSpriteNode()
+                for cell in array{
+                    
+                        
+                            if cell.contains(touch.location(in: self))  {
+                                notPosition = cell
+
+                        }
+                        
+                    }
+                if !notPosition.contains(touch.location(in: self)){
+                    location = touch.location(in: self)
+                }
+                
+            }
+            
+            if let location = location{
+            let touchedNodes = self.nodes(at: location)
+            for node in touchedNodes.reversed() {
+               
+                    for object in frontObject() {
+                    
+                        if node.name == object.name {
+                            
+                                    
+                                
+                                self.currentNode = node
+                                oldPosition = node.position
+                        
+                            
+                            
+                            
+                            
+                            
+                           
+                        }
+                    }
+                }
+               
             }
         }
     }
@@ -224,7 +297,7 @@ class GameScene: SKScene {
         if let touch = touches.first, let node = self.currentNode {
             let touchLocation = touch.location(in: self)
             node.position = touchLocation
-            
+            node.zPosition = 150
            
         }
     }
@@ -233,6 +306,7 @@ class GameScene: SKScene {
         
        
         if let node = self.currentNode{
+            
            pointArray.sort(by: {calculateDistance(object: node.position, point: $0.point) < calculateDistance(object: node.position, point: $1.point)})
             var newArray = [Point]()
             for i in pointArray.indices {
@@ -264,12 +338,13 @@ class GameScene: SKScene {
                // checkEqual()
                isMoved = true
                 node.position = newPosition
-                
+                node.zPosition = 7
             
             } else {
                 if let objectPosition = oldPosition{
                     let timeDuration = CGFloat(sqrt((node.position.x - objectPosition.x) * (node.position.x - objectPosition.x) + (node.position.y - objectPosition.y) * (node.position.y - objectPosition.y)) / 500)
                     node.run(SKAction.move(to: objectPosition, duration: timeDuration))
+                    node.zPosition = 7
            
                 }
             }
@@ -318,7 +393,7 @@ class GameScene: SKScene {
     func createObject(){
       
         var array = pointArray.shuffled()
-        print(array.count)
+        
             if gameObjectArray.count <= 42 {
                 for (key,_) in gameObjectArray{
                 objectArray.append(Objects(name: key,
@@ -356,7 +431,7 @@ class GameScene: SKScene {
                     }
                 
                 array.removeAll()
-                print("point \(pointArray.count)")
+                
                 array = pointArray.shuffled()
                     for i in 42..<87 {
                         objectArray.append(Objects(name: gameObjectArray[i].1,
@@ -382,16 +457,38 @@ class GameScene: SKScene {
             addChild(object)
         }
 
-        print(objectArray.count)
+       
     }
     
     func createIsolate(){
-        let isolation = SKSpriteNode(imageNamed: "isolation")
-        isolation.size = cellArray[0].size
-        isolation.name = "isolation"
-        isolation.position = cellArray[2].position
-        isolation.zPosition = 10
-        addChild(isolation)
+        
+        var arrayCell = checkEqual().shuffled()
+       
+        for _ in 0..<isolateCount{
+            
+            
+            let isolation = SKSpriteNode(imageNamed: "isolation")
+            isolation.size = CGSize(width: cellArray[0].size.width - 1, height: cellArray[0].size.height - 1)
+            isolation.name = "isolation"
+            isolation.position = arrayCell.removeFirst()
+            isolation.zPosition = 8
+            let lable = SKLabelNode()
+            lable.text = String(сoincidenceCount)
+            lable.fontName = "BauhausITCbyBT-Heavy"
+            lable.fontSize = sizeText
+            lable.zPosition = 9
+            lable.fontColor = .black
+            lable.position.y = -isolation.size.height / 4
+            isolation.addChild(lable)
+            
+            isolateArray.append(isolation)
+        }
+        
+        for isolate in isolateArray{
+            
+            addChild(isolate)
+        }
+        
     }
     
    
