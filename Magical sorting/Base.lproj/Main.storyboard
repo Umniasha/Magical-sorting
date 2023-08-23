@@ -7,6 +7,11 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="ITC Bauhaus Heavy.ttf">
+            <string>BauhausITCbyBT-Heavy</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--About View Controller-->
         <scene sceneID="Ybv-HC-Qlb">
@@ -300,9 +305,18 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <backgroundConfiguration key="background" image="crystal"/>
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="10">
+                                            <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="16" name="BauhausITCbyBT-Heavy"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
                                 </buttonConfiguration>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ar-Sa-y0Z">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ar-Sa-y0Z">
                                 <rect key="frame" x="0.0" y="717" width="112.5" height="179"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5Ar-Sa-y0Z" secondAttribute="height" multiplier="1:1.59" id="U2U-A6-GN7"/>
@@ -323,34 +337,257 @@
                                     <attributedString key="attributedTitle">
                                         <fragment content="324">
                                             <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="11" name="BauhausITCbyBT-Heavy"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
                                 </buttonConfiguration>
                             </button>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Component 1 (7)" translatesAutoresizingMaskIntoConstraints="NO" id="ble-C1-aZe">
+                                <rect key="frame" x="22" y="594" width="370" height="302"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ble-C1-aZe" secondAttribute="height" multiplier="185:151" id="TQJ-Qf-a3Q"/>
+                                </constraints>
+                            </imageView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8n7-Sd-ZFI">
+                                <rect key="frame" x="147.5" y="431.5" width="119" height="43.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="8n7-Sd-ZFI" secondAttribute="height" multiplier="118:43" id="SXm-dX-NTW"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Group 22-1">
+                                    <backgroundConfiguration key="background" image="Group 22"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="nextGameButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="LOZ-78-GFs"/>
+                                </connections>
+                            </button>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="YOU LOSE" translatesAutoresizingMaskIntoConstraints="NO" id="mhY-tq-vZB">
+                                <rect key="frame" x="41.5" y="363" width="331" height="48.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="mhY-tq-vZB" secondAttribute="height" multiplier="55:8" id="f9f-Wg-hmt"/>
+                                </constraints>
+                            </imageView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="Group 94" translatesAutoresizingMaskIntoConstraints="NO" id="CdZ-Q9-zgX">
+                                <rect key="frame" x="0.0" y="141" width="414" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="CdZ-Q9-zgX" secondAttribute="height" multiplier="393:55" id="JzX-uK-eLC"/>
+                                </constraints>
+                            </imageView>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="145" translatesAutoresizingMaskIntoConstraints="NO" id="jRP-fR-6Sv">
+                                <rect key="frame" x="20" y="154" width="374" height="31.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afa-hg-lwa">
+                                        <rect key="frame" x="0.0" y="0.0" width="123" height="31.5"/>
+                                        <fontDescription key="fontDescription" name="BauhausITCbyBT-Heavy" family="ITC Bauhaus" pointSize="25"/>
+                                        <color key="textColor" red="0.040498927240000003" green="0.087248794729999996" blue="0.19937175509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="best time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2R0-eH-zPl">
+                                        <rect key="frame" x="268" y="0.0" width="106" height="31.5"/>
+                                        <fontDescription key="fontDescription" name="BauhausITCbyBT-Heavy" family="ITC Bauhaus" pointSize="25"/>
+                                        <color key="textColor" red="0.040498927240000003" green="0.087248794729999996" blue="0.19937175509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mWI-ee-30x">
+                                <rect key="frame" x="28.5" y="207" width="357" height="239"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="145" translatesAutoresizingMaskIntoConstraints="NO" id="lwd-ZR-DkJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="357" height="31.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="You" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4HC-I1-EaZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="31.5"/>
+                                                <fontDescription key="fontDescription" name="BauhausITCbyBT-Heavy" family="ITC Bauhaus" pointSize="25"/>
+                                                <color key="textColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWy-5p-Sy8">
+                                                <rect key="frame" x="327.5" y="0.0" width="29.5" height="31.5"/>
+                                                <fontDescription key="fontDescription" name="BauhausITCbyBT-Heavy" family="ITC Bauhaus" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="4HC-I1-EaZ" firstAttribute="baseline" secondItem="qWy-5p-Sy8" secondAttribute="firstBaseline" id="3vO-hS-zmA"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="145" translatesAutoresizingMaskIntoConstraints="NO" id="iEn-XQ-uPJ">
+                                        <rect key="frame" x="0.0" y="41.5" width="357" height="31.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="William Lane" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASU-8x-iPi">
+                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="31.5"/>
+                                                <fontDescription key="fontDescription" name="BauhausITCbyBT-Heavy" family="ITC Bauhaus" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bO3-P4-2r5">
+                                                <rect key="frame" x="327.5" y="0.0" width="29.5" height="31.5"/>
+                                                <fontDescription key="fontDescription" name="BauhausITCbyBT-Heavy" family="ITC Bauhaus" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="ASU-8x-iPi" firstAttribute="baseline" secondItem="bO3-P4-2r5" secondAttribute="firstBaseline" id="R6z-VP-tME"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="145" translatesAutoresizingMaskIntoConstraints="NO" id="HsX-bg-jda">
+                                        <rect key="frame" x="0.0" y="83" width="357" height="31.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="William Lane" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBZ-TI-0Bw">
+                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="31.5"/>
+                                                <fontDescription key="fontDescription" name="BauhausITCbyBT-Heavy" family="ITC Bauhaus" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qea-Lp-sUL">
+                                                <rect key="frame" x="327.5" y="0.0" width="29.5" height="31.5"/>
+                                                <fontDescription key="fontDescription" name="BauhausITCbyBT-Heavy" family="ITC Bauhaus" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="MBZ-TI-0Bw" firstAttribute="baseline" secondItem="qea-Lp-sUL" secondAttribute="firstBaseline" id="eUP-9w-Nlt"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="145" translatesAutoresizingMaskIntoConstraints="NO" id="fBN-Y3-ha5">
+                                        <rect key="frame" x="0.0" y="124.5" width="357" height="31.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="William Lane" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0V-aa-ybl">
+                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="31.5"/>
+                                                <fontDescription key="fontDescription" name="BauhausITCbyBT-Heavy" family="ITC Bauhaus" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2an-yA-sJb">
+                                                <rect key="frame" x="327.5" y="0.0" width="29.5" height="31.5"/>
+                                                <fontDescription key="fontDescription" name="BauhausITCbyBT-Heavy" family="ITC Bauhaus" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="z0V-aa-ybl" firstAttribute="baseline" secondItem="2an-yA-sJb" secondAttribute="firstBaseline" id="HAB-QL-bM4"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="145" translatesAutoresizingMaskIntoConstraints="NO" id="dCh-Er-ldQ">
+                                        <rect key="frame" x="0.0" y="166" width="357" height="31.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="William Lane" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3eY-Kr-Num">
+                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="31.5"/>
+                                                <fontDescription key="fontDescription" name="BauhausITCbyBT-Heavy" family="ITC Bauhaus" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIp-Yn-d21">
+                                                <rect key="frame" x="327.5" y="0.0" width="29.5" height="31.5"/>
+                                                <fontDescription key="fontDescription" name="BauhausITCbyBT-Heavy" family="ITC Bauhaus" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="3eY-Kr-Num" firstAttribute="baseline" secondItem="CIp-Yn-d21" secondAttribute="firstBaseline" id="5TG-ej-Ocs"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="145" translatesAutoresizingMaskIntoConstraints="NO" id="ZaB-QP-mZd">
+                                        <rect key="frame" x="0.0" y="207.5" width="357" height="31.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="William Lane" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDg-pq-SC5">
+                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="31.5"/>
+                                                <fontDescription key="fontDescription" name="BauhausITCbyBT-Heavy" family="ITC Bauhaus" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7I-B7-uwN">
+                                                <rect key="frame" x="327.5" y="0.0" width="29.5" height="31.5"/>
+                                                <fontDescription key="fontDescription" name="BauhausITCbyBT-Heavy" family="ITC Bauhaus" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20N-pS-bHC">
+                                <rect key="frame" x="147.5" y="793.5" width="119" height="43.5"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Group 2321">
+                                    <backgroundConfiguration key="background" image="Group 2321"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="nextGameButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="8C2-NJ-xth"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray2Color"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="5Ar-Sa-y0Z" secondAttribute="bottom" id="3cw-Rg-Eem"/>
+                            <constraint firstItem="mWI-ee-30x" firstAttribute="width" secondItem="CdZ-Q9-zgX" secondAttribute="width" multiplier="0.862319" id="529-ff-LM0"/>
                             <constraint firstItem="eg5-1D-bwa" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="10" id="5Yc-ID-mv3"/>
+                            <constraint firstItem="CdZ-Q9-zgX" firstAttribute="top" secondItem="HDB-1f-iZT" secondAttribute="bottom" constant="25" id="7gb-ce-sii"/>
+                            <constraint firstItem="mhY-tq-vZB" firstAttribute="centerX" secondItem="4qk-I5-YsI" secondAttribute="centerX" id="94c-gr-k8n"/>
+                            <constraint firstItem="mWI-ee-30x" firstAttribute="top" secondItem="CdZ-Q9-zgX" secondAttribute="bottom" constant="8" id="9Ov-Fg-yJv"/>
                             <constraint firstItem="HDB-1f-iZT" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="10" id="Awf-5f-eGf"/>
+                            <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="jRP-fR-6Sv" secondAttribute="trailing" constant="20" id="BbS-ZL-Jh0"/>
+                            <constraint firstItem="8n7-Sd-ZFI" firstAttribute="centerY" secondItem="4qk-I5-YsI" secondAttribute="centerY" id="Ek9-4Y-AUC"/>
+                            <constraint firstAttribute="bottom" secondItem="ble-C1-aZe" secondAttribute="bottom" id="Ibw-qv-HYm"/>
                             <constraint firstItem="eg5-1D-bwa" firstAttribute="height" secondItem="HDB-1f-iZT" secondAttribute="height" multiplier="0.862069" constant="-3.4482758620689609" id="Kht-EE-Sni"/>
                             <constraint firstItem="HDB-1f-iZT" firstAttribute="height" secondItem="O94-lD-RH5" secondAttribute="height" multiplier="1.37778" id="LnW-hP-Egi"/>
+                            <constraint firstItem="8n7-Sd-ZFI" firstAttribute="height" secondItem="3se-qz-xqx" secondAttribute="height" multiplier="0.0485491" id="N8o-6v-WS5"/>
                             <constraint firstItem="O94-lD-RH5" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" constant="30" id="NaT-NG-FiP"/>
+                            <constraint firstItem="20N-pS-bHC" firstAttribute="width" secondItem="20N-pS-bHC" secondAttribute="height" multiplier="118:43" id="RxI-jk-e9N"/>
                             <constraint firstItem="O94-lD-RH5" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="10" id="SVC-uC-Y5l"/>
                             <constraint firstItem="5Ar-Sa-y0Z" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="Uaq-my-7yJ"/>
+                            <constraint firstItem="jRP-fR-6Sv" firstAttribute="centerY" secondItem="CdZ-Q9-zgX" secondAttribute="centerY" id="UfI-eb-btW"/>
+                            <constraint firstItem="ble-C1-aZe" firstAttribute="height" secondItem="3se-qz-xqx" secondAttribute="height" multiplier="0.337054" id="VC6-84-ebW"/>
                             <constraint firstItem="HDB-1f-iZT" firstAttribute="centerX" secondItem="4qk-I5-YsI" secondAttribute="centerX" id="XSs-SH-Qlp"/>
                             <constraint firstItem="O94-lD-RH5" firstAttribute="height" secondItem="3se-qz-xqx" secondAttribute="height" multiplier="0.0502232" id="dGQ-wc-U0r"/>
+                            <constraint firstItem="20N-pS-bHC" firstAttribute="centerX" secondItem="4qk-I5-YsI" secondAttribute="centerX" id="ec1-Bt-OqB"/>
+                            <constraint firstItem="4qk-I5-YsI" firstAttribute="bottom" secondItem="20N-pS-bHC" secondAttribute="bottom" constant="25" id="f8e-rw-GvK"/>
+                            <constraint firstItem="mWI-ee-30x" firstAttribute="centerX" secondItem="jRP-fR-6Sv" secondAttribute="centerX" id="guf-SW-67s"/>
+                            <constraint firstItem="jRP-fR-6Sv" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" constant="20" id="mMg-Bb-QDX"/>
+                            <constraint firstItem="CdZ-Q9-zgX" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="nXJ-Mu-WX7"/>
                             <constraint firstItem="5Ar-Sa-y0Z" firstAttribute="height" secondItem="3se-qz-xqx" secondAttribute="height" multiplier="1:5" id="omt-iu-EE3"/>
+                            <constraint firstItem="ble-C1-aZe" firstAttribute="centerX" secondItem="4qk-I5-YsI" secondAttribute="centerX" id="ozf-Ws-1db"/>
+                            <constraint firstItem="20N-pS-bHC" firstAttribute="height" secondItem="3se-qz-xqx" secondAttribute="height" multiplier="0.0485491" id="q0V-Iq-W3d"/>
+                            <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="CdZ-Q9-zgX" secondAttribute="trailing" id="ucA-yM-VGS"/>
+                            <constraint firstItem="8n7-Sd-ZFI" firstAttribute="top" secondItem="mhY-tq-vZB" secondAttribute="bottom" constant="20" id="v8i-NJ-XDo"/>
                             <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="eg5-1D-bwa" secondAttribute="trailing" constant="20" id="wc7-Az-a89"/>
+                            <constraint firstItem="mhY-tq-vZB" firstAttribute="width" secondItem="8n7-Sd-ZFI" secondAttribute="width" multiplier="2.77311" id="wfl-Vc-Qg3"/>
+                            <constraint firstItem="8n7-Sd-ZFI" firstAttribute="centerX" secondItem="4qk-I5-YsI" secondAttribute="centerX" id="xhY-2x-COI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uEd-Cq-gjg"/>
                     <connections>
+                        <outlet property="backNameOutlet" destination="CdZ-Q9-zgX" id="leS-I7-Vdd"/>
+                        <outlet property="crystalLable" destination="eg5-1D-bwa" id="LRk-o6-FIa"/>
+                        <outlet property="magic" destination="5Ar-Sa-y0Z" id="mPz-WR-sVq"/>
+                        <outlet property="nameOutlet" destination="jRP-fR-6Sv" id="CBm-3r-iRx"/>
+                        <outlet property="nextButtonOutlet" destination="20N-pS-bHC" id="LrM-Ja-fNh"/>
+                        <outlet property="stackWithResultsOutlet" destination="mWI-ee-30x" id="zY3-nR-tQd"/>
                         <outlet property="timerLable" destination="HDB-1f-iZT" id="abY-PM-u0l"/>
+                        <outlet property="tryAgainOutlet" destination="8n7-Sd-ZFI" id="Qtf-LA-Gsx"/>
+                        <outlet property="yourTime" destination="qWy-5p-Sy8" id="46e-ph-6BA"/>
+                        <outletCollection property="loseImage" destination="mhY-tq-vZB" collectionClass="NSMutableArray" id="aG8-mt-qxb"/>
+                        <outletCollection property="loseImage" destination="ble-C1-aZe" collectionClass="NSMutableArray" id="5Gy-aD-LQO"/>
+                        <outletCollection property="nameLableCollection" destination="ASU-8x-iPi" collectionClass="NSMutableArray" id="DMZ-cj-YFn"/>
+                        <outletCollection property="nameLableCollection" destination="MBZ-TI-0Bw" collectionClass="NSMutableArray" id="YF0-o9-dp3"/>
+                        <outletCollection property="nameLableCollection" destination="z0V-aa-ybl" collectionClass="NSMutableArray" id="7zM-gq-Bgh"/>
+                        <outletCollection property="nameLableCollection" destination="3eY-Kr-Num" collectionClass="NSMutableArray" id="l6S-cV-AUe"/>
+                        <outletCollection property="nameLableCollection" destination="RDg-pq-SC5" collectionClass="NSMutableArray" id="aBB-MS-rv9"/>
+                        <outletCollection property="scoreLableCollection" destination="bO3-P4-2r5" collectionClass="NSMutableArray" id="kg3-as-7xF"/>
+                        <outletCollection property="scoreLableCollection" destination="qea-Lp-sUL" collectionClass="NSMutableArray" id="5Sm-Bz-9tw"/>
+                        <outletCollection property="scoreLableCollection" destination="2an-yA-sJb" collectionClass="NSMutableArray" id="iAH-r1-Trk"/>
+                        <outletCollection property="scoreLableCollection" destination="CIp-Yn-d21" collectionClass="NSMutableArray" id="Jah-lX-dG8"/>
+                        <outletCollection property="scoreLableCollection" destination="m7I-B7-uwN" collectionClass="NSMutableArray" id="PuN-ub-AZy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -364,17 +601,22 @@
         <image name="Component 1 (4)" width="116" height="133"/>
         <image name="Component 1 (5)" width="116" height="115"/>
         <image name="Component 1 (6)" width="116" height="115"/>
+        <image name="Component 1 (7)" width="367" height="302"/>
         <image name="Group 20" width="51" height="34"/>
         <image name="Group 21" width="51" height="34"/>
         <image name="Group 22" width="130" height="47"/>
+        <image name="Group 22-1" width="154" height="56"/>
         <image name="Group 23" width="91" height="50"/>
         <image name="Group 23-1" width="130" height="47"/>
+        <image name="Group 2321" width="154" height="56"/>
+        <image name="Group 94" width="393" height="55"/>
         <image name="Group 98" width="62" height="57"/>
         <image name="Group 99" width="56" height="45"/>
         <image name="PLAY" width="137" height="134"/>
         <image name="She'll help you make magic and get your chosen item in a row automatically" width="283" height="30"/>
         <image name="Shop" width="512" height="1110"/>
         <image name="That'll give you a 15 second head start on time!" width="282" height="14"/>
+        <image name="YOU LOSE" width="731" height="110"/>
         <image name="crystal" width="75" height="50"/>
         <image name="home" width="40" height="46"/>
         <image name="magic" width="114" height="181"/>
@@ -382,6 +624,9 @@
         <image name="timer" width="58" height="58"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

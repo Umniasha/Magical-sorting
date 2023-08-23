@@ -12,30 +12,48 @@ import GameplayKit
 class GameViewController: UIViewController {
 
     var gameScene : GameScene!
-    @IBOutlet weak var lable: UILabel!
+    
+    
+    @IBOutlet weak var tryAgainOutlet: UIButton!
+    @IBOutlet var loseImage: [UIImageView]!
+    @IBOutlet weak var magic: UIButton!
+    @IBOutlet weak var crystalLable: UIButton!
     @IBOutlet weak var timerLable: UIButton!
+   
+    @IBOutlet weak var nameOutlet: UIStackView!
+    
+    @IBOutlet weak var backNameOutlet: UIImageView!
+    @IBOutlet weak var stackWithResultsOutlet: UIStackView!
+    @IBOutlet weak var nextButtonOutlet: UIButton!
+    
+    @IBOutlet var nameLableCollection: [UILabel]!
+    @IBOutlet var scoreLableCollection: [UILabel]!
+    @IBOutlet weak var yourTime: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
        
         
         if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
+            
             if let scene = SKScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
+                
                 scene.scaleMode = .aspectFill
                 gameScene = scene as! GameScene
                 gameScene.gameViewController = self
-                // Present the scene
+                
                 view.presentScene(scene)
                 
             }
             
             view.ignoresSiblingOrder = true
             
-            view.showsFPS = true
-            view.showsNodeCount = true
-            view.showsPhysics = true
+            view.showsFPS = false
+            view.showsNodeCount = false
+            view.showsPhysics = false
         }
        
     }
@@ -44,6 +62,7 @@ class GameViewController: UIViewController {
         return true
     }
 
+   
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone {
             return  .portrait
@@ -54,5 +73,22 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    @IBAction func nextGameButton(_ sender: Any) {
+        if let view = self.view as! SKView? {
+            
+            if let scene = SKScene(fileNamed: "GameScene") {
+                
+                scene.scaleMode = .aspectFill
+                gameScene = scene as! GameScene
+                gameScene.gameViewController = self
+                
+                view.presentScene(scene)
+                
+            }
+            
+            view.ignoresSiblingOrder = true
+            
+        }
     }
 }

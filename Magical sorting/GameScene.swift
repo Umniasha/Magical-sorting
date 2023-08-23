@@ -14,7 +14,7 @@ class GameScene: SKScene {
     private var currentNode: SKNode?
     var oldPosition : CGPoint!
     var newPosition : CGPoint!
-    
+    var backGround = SKSpriteNode()
     var backShelf = SKSpriteNode()
     var objectArray = [SKSpriteNode]()
     var pointArray = [Point]()
@@ -26,12 +26,21 @@ class GameScene: SKScene {
     var gameTimer = Timer()
     var gameTime = Int()
     var sizeText = CGFloat()
-    var сoincidenceCount = Int()
-    var isolateArray = [SKSpriteNode]()
+    var numberCount = Int()
+    var isolateArray = [Izolation]()
     var isolateCount = Int()
-    
+    var timerResult = Int()
     
     override func didMove(to view: SKView) {
+      
+        
+        
+       playGame()
+      
+   
+    }
+    
+    func playGame(){
         scene?.size = UIScreen.main.bounds.size
         if UIScreen.main.bounds.size.height > 800 {
             sizeText = 20
@@ -39,38 +48,152 @@ class GameScene: SKScene {
             sizeText = 12
         }
         
+    
+        
+        
         createShelf()
-        createBG()
+        createBG(imageNamed: "bg")
+        timerResult = 1
         objectSize = CGSize(width: backShelf.size.width / 11 , height: backShelf.size.height / 11)
-        objectCount = 44
+        switch level{
+        case 1...5 :    objectCount = 10
+                        isolateCount = 0
+                        gameTime = 60
+            
+        case 6...10 :   objectCount = 15
+                        isolateCount = 0
+                        gameTime = 120
+            
+        case 11...20 :   objectCount = 20
+                        isolateCount = 1
+                        gameTime = 180
+            
+        case 21...30 :   objectCount = 30
+                        isolateCount = 2
+                        gameTime = 300
+            
+        case 31...40 :   objectCount = 40
+                        isolateCount = 3
+                        gameTime = 350
+            
+            
+        default: objectCount = 44
+                isolateCount = 3
+                gameTime = 400
+            
+        }
+       
+        
+        print(level)
+        numberCount = 5
         createGameArray()
         createObject()
         
         checkLocation()
         checkEqual()
-        gameTime = 150
+        gameViewController.magic.isHidden = false
+        gameViewController.timerLable.isHidden = false
         gameViewController.timerLable.titleLabel?.font =  UIFont(name: "BauhausITCbyBT-Heavy", size: sizeText)
         gameViewController.timerLable.titleLabel?.text = String(gameTime)
         gameViewController.timerLable.titleLabel?.textColor = .white
         gameViewController.timerLable.titleLabel?.textAlignment = .center
-        сoincidenceCount = 3
-        isolateCount = 3
+        
+        gameViewController.crystalLable.titleLabel?.font =  UIFont(name: "BauhausITCbyBT-Heavy", size: sizeText - 5)
+        gameViewController.crystalLable.titleLabel?.text = String(crystal)
+        gameViewController.crystalLable.titleLabel?.textColor = .white
+        gameViewController.crystalLable.titleLabel?.textAlignment = .center
+        
+        for loseImage in gameViewController.loseImage{
+            loseImage.isHidden = true
+        }
+        gameViewController.tryAgainOutlet.isHidden = true
+        gameViewController.tryAgainOutlet.isEnabled = false
+        
+        gameViewController.backNameOutlet.isHidden = true
+        gameViewController.stackWithResultsOutlet.isHidden = true
+        gameViewController.nextButtonOutlet.isHidden = true
+        gameViewController.nextButtonOutlet.isEnabled = false
+        gameViewController.nameOutlet.isHidden = true
         createIsolate()
-       
-      
-   
     }
     
-    func removeIsolation(){
-        var array = isolateArray
-        for isolate in array {
+    func gameWin(){
+        if timerResult > 0 && frontObject().count == 0{
+            
+            self.isPaused = true
+            gameTimer.invalidate()
+            gameViewController.yourTime.text = String(gameTime -  timerResult )
+            removeAllChildren()
+            
+            gameViewController.timerLable.isHidden = true
+            gameViewController.magic.isHidden = true
+            createBG(imageNamed: "Untitled (1)")
+            gameViewController.backNameOutlet.isHidden = false
+            gameViewController.stackWithResultsOutlet.isHidden = false
+            gameViewController.nextButtonOutlet.isHidden = false
+            gameViewController.nextButtonOutlet.isEnabled = true
+            gameViewController.nameOutlet.isHidden = false
+            level += 1
+            crystal += 10
+            saveData()
+            gameViewController.crystalLable.titleLabel?.text = String(crystal)
            
-            if сoincidenceCount == 0 && isolate.name != nil{
-                print(777)
-                isolate.removeFromParent()
-                isolate.name = nil
-                сoincidenceCount = 3
+            
+            var array = nameArray.shuffled()
+            for name in gameViewController.nameLableCollection{
+                name.text = array.removeLast()
             }
+            var bestTimeArray = [Int]()
+            for _ in 1...10{
+                let bestTime = Int.random(in: (gameTime - timerResult...gameTime))
+                bestTimeArray.append(bestTime)
+            }
+            bestTimeArray = bestTimeArray.sorted(by: <)
+            for result in gameViewController.scoreLableCollection{
+                result.text = String(bestTimeArray.removeFirst())
+            }
+            
+            
+        }
+        
+    }
+    
+    func gameOver(){
+        if timerResult == 0 && frontObject().count > 0{
+            self.isPaused = true
+            removeAllChildren()
+            
+           
+            
+            gameViewController.timerLable.isHidden = true
+            gameViewController.magic.isHidden = true
+            for loseImage in gameViewController.loseImage{
+                loseImage.isHidden = false
+            }
+            gameViewController.tryAgainOutlet.isHidden = false
+            gameViewController.tryAgainOutlet.isEnabled = true
+            
+            createBG(imageNamed: "bg")
+        }
+    }
+    
+    
+    func removeIsolation(){
+       // var array = isolateArray
+        var array = [Izolation]()
+        for isolate in isolateArray {
+            if isolate.isolationNode.name != nil {
+                array.append(isolate)
+            }
+        }
+        if !array.isEmpty{
+        array.first?.isolationLable.text = String(numberCount)
+        if numberCount == 0 && array.first?.isolationNode.name != nil{
+             
+            array.first?.isolationNode.removeFromParent()
+            array.first?.isolationNode.name = nil
+              numberCount = 5
+          }
         }
     }
    
@@ -126,8 +249,8 @@ class GameScene: SKScene {
             }
         
                 if array.count == 3 && array[0].name == array[1].name && array[1].name == array[2].name{
-                    self.сoincidenceCount -= 1
-                    print(сoincidenceCount)
+                    self.numberCount -= 1
+                   
                         for i in 0..<objectArray.count {
                             if objectArray[i] == array[0] || objectArray[i] == array[1] || objectArray[i] == array[2]{
                                    
@@ -193,6 +316,8 @@ class GameScene: SKScene {
         }
         checkLocation()
         removeIsolation()
+        gameOver()
+        gameWin()
     }
     
     
@@ -319,12 +444,13 @@ class GameScene: SKScene {
                 if calculateDistance(object: node.position, point: point ) <= node.frame.size.width {
                 newPosition = newArray.first?.point
                     if !gameTimer.isValid {
+                        timerResult = gameTime
                         gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {  _ in
                             
-                            self.gameTime -= 1
+                            self.timerResult -= 1
                             
                             self.gameViewController.timerLable.titleLabel?.font =  UIFont(name: "BauhausITCbyBT-Heavy", size: self.sizeText)
-                            self.gameViewController.timerLable.titleLabel?.text = String(self.gameTime)
+                            self.gameViewController.timerLable.titleLabel?.text = String(self.timerResult)
                             self.gameViewController.timerLable.titleLabel?.textColor = .white
                             self.gameViewController.timerLable.titleLabel?.textAlignment = .center
                             
@@ -472,21 +598,23 @@ class GameScene: SKScene {
             isolation.name = "isolation"
             isolation.position = arrayCell.removeFirst()
             isolation.zPosition = 8
+            
             let lable = SKLabelNode()
-            lable.text = String(сoincidenceCount)
+            lable.text = String(numberCount)
             lable.fontName = "BauhausITCbyBT-Heavy"
             lable.fontSize = sizeText
             lable.zPosition = 9
             lable.fontColor = .black
             lable.position.y = -isolation.size.height / 4
             isolation.addChild(lable)
+            let isolationClassChild = Izolation(isolationNode: isolation, isolationLable: lable)
             
-            isolateArray.append(isolation)
+            isolateArray.append(isolationClassChild)
         }
         
         for isolate in isolateArray{
             
-            addChild(isolate)
+            addChild(isolate.isolationNode)
         }
         
     }
@@ -596,8 +724,8 @@ class GameScene: SKScene {
     
 
     
-    func createBG(){
-        let backGround = SKSpriteNode(imageNamed: "bg")
+    func createBG(imageNamed: String){
+        backGround = SKSpriteNode(imageNamed: imageNamed)
         backGround.size = self.scene!.frame.size
         backGround.name = "bg"
         backGround.zPosition = -1
