@@ -297,7 +297,7 @@
                                     <segue destination="9V2-qR-Z9V" kind="unwind" unwindAction="toMain:" id="0si-TD-pQ7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eg5-1D-bwa">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eg5-1D-bwa">
                                 <rect key="frame" x="319" y="54" width="75" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="eg5-1D-bwa" secondAttribute="height" multiplier="1.5:1" id="fmK-3i-RdX"/>
@@ -326,7 +326,7 @@
                                     <backgroundConfiguration key="background" image="magic"/>
                                 </buttonConfiguration>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDB-1f-iZT">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDB-1f-iZT">
                                 <rect key="frame" x="173.5" y="54" width="67" height="62"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="HDB-1f-iZT" secondAttribute="height" multiplier="1:1" constant="5" id="hFy-aT-szW"/>

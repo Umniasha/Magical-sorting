@@ -7,6 +7,7 @@
 
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
 class GameScene: SKScene {
 
@@ -30,15 +31,19 @@ class GameScene: SKScene {
     var isolateArray = [Izolation]()
     var isolateCount = Int()
     var timerResult = Int()
+    var sound = SKAction.playSoundFileNamed("small.mp3", waitForCompletion: false)
     
     override func didMove(to view: SKView) {
       
         
         
        playGame()
-      
+       
+        
    
     }
+    
+
     
     func playGame(){
         scene?.size = UIScreen.main.bounds.size
@@ -163,6 +168,7 @@ class GameScene: SKScene {
             self.isPaused = true
             removeAllChildren()
             
+            gameTimer.invalidate()
            
             
             gameViewController.timerLable.isHidden = true
@@ -179,7 +185,7 @@ class GameScene: SKScene {
     
     
     func removeIsolation(){
-       // var array = isolateArray
+       
         var array = [Izolation]()
         for isolate in isolateArray {
             if isolate.isolationNode.name != nil {
@@ -254,10 +260,11 @@ class GameScene: SKScene {
                         for i in 0..<objectArray.count {
                             if objectArray[i] == array[0] || objectArray[i] == array[1] || objectArray[i] == array[2]{
                                    
-
-                                _ = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
+                                   
+                                _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
                                     self.objectArray[i].removeFromParent()
-                                    
+                                    MusicPlayer.shared.clickSound()
+                                   // MusicPlayer.shared.backgroundMusic()
                                     
                                 }
                             }

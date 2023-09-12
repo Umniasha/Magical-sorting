@@ -6,22 +6,26 @@
 //
 
 import UIKit
+import SpriteKit
+import AVFoundation
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController{
 
+  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        MusicHelper.sharedHelper.playBackgroundMusic()
         // Do any additional setup after loading the view.
     }
+    
+  
     
     @IBAction func toMain(_ unwindSegue: UIStoryboardSegue){
         
     }
 
-    deinit{
-        print(666)
-    }
+  
     /*
     // MARK: - Navigation
 

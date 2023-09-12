@@ -7,7 +7,7 @@
 
 import Foundation
 
-var level = Int()
+var level : Int = 10
 var crystal : Int = 0
 
 let nameArray = ["William Lane",
@@ -28,14 +28,14 @@ func saveData(){
 }
 
 func loadData(){
-    if let saveLevel = UserDefaults.standard.array(forKey: "GameLevel") as? Int{
+    if let saveLevel = UserDefaults.standard.integer(forKey: "GameLevel") as? Int{
         level = saveLevel
     } else {
         level = 1
     }
     
     
-    if let saveCrystal = UserDefaults.standard.array(forKey: "GameCrystal") as? Int{
+    if let saveCrystal = UserDefaults.standard.integer(forKey: "GameCrystal") as? Int{
         crystal = saveCrystal
     } else {
         crystal = 0

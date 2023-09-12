@@ -24,6 +24,9 @@
 		6B6FC68D2A8BAA3100868330 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B6FC68B2A8BAA3100868330 /* Main.storyboard */; };
 		6B6FC68F2A8BAA3500868330 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B6FC68E2A8BAA3500868330 /* Assets.xcassets */; };
 		6B6FC6922A8BAA3500868330 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B6FC6902A8BAA3500868330 /* LaunchScreen.storyboard */; };
+		6BF152322A967F5800310270 /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6BF152302A967F5800310270 /* background.mp3 */; };
+		6BF152332A967F5800310270 /* small.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6BF152312A967F5800310270 /* small.mp3 */; };
+		6BF152372A968BBE00310270 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF152362A968BBE00310270 /* MusicPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,9 @@
 		6B6FC68C2A8BAA3100868330 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6B6FC68E2A8BAA3500868330 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B6FC6912A8BAA3500868330 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6BF152302A967F5800310270 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
+		6BF152312A967F5800310270 /* small.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = small.mp3; sourceTree = "<group>"; };
+		6BF152362A968BBE00310270 /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B6166222AB08B5F00DF4F89 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6B1FAA812A94EA6300772ADE /* ITC Bauhaus Heavy.ttf */,
+				6B6166252AB08C1500DF4F89 /* Sound */,
+				6B1FAA862A95003900772ADE /* Level.swift */,
+				6B31816F2A8F59CF006B5227 /* Objects.swift */,
+				6B31818D2A90EDAA006B5227 /* points.swift */,
+				6B5E357F2A9618D700953699 /* Isolation.swift */,
+				6B1FAA7F2A9246EA00772ADE /* TextureForObjects.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6B6166232AB08B6900DF4F89 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6B6FC68E2A8BAA3500868330 /* Assets.xcassets */,
+				6B6FC68B2A8BAA3100868330 /* Main.storyboard */,
+				6B6FC6902A8BAA3500868330 /* LaunchScreen.storyboard */,
+				6B1965FF2A95440400606CA4 /* MainViewController.swift */,
+				6B6FC6892A8BAA3100868330 /* GameViewController.swift */,
+				6B1966032A954CB400606CA4 /* ShopViewController.swift */,
+				6B1966012A9549B000606CA4 /* AboutViewController.swift */,
+				6B6FC6852A8BAA3100868330 /* Actions.sks */,
+				6B6FC6832A8BAA3100868330 /* GameScene.sks */,
+				6B6FC6872A8BAA3100868330 /* GameScene.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6B6166242AB08B7100DF4F89 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6BF152362A968BBE00310270 /* MusicPlayer.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6B6166252AB08C1500DF4F89 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				6BF152302A967F5800310270 /* background.mp3 */,
+				6BF152312A967F5800310270 /* small.mp3 */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		6B6FC6752A8BAA3100868330 = {
 			isa = PBXGroup;
 			children = (
@@ -78,24 +132,11 @@
 		6B6FC6802A8BAA3100868330 /* Magical sorting */ = {
 			isa = PBXGroup;
 			children = (
+				6B6166242AB08B7100DF4F89 /* ViewModel */,
+				6B6166232AB08B6900DF4F89 /* View */,
+				6B6166222AB08B5F00DF4F89 /* Model */,
 				6B1FAA832A94ECD500772ADE /* Magical-sorting-Info.plist */,
 				6B6FC6812A8BAA3100868330 /* AppDelegate.swift */,
-				6B6FC6832A8BAA3100868330 /* GameScene.sks */,
-				6B6FC6852A8BAA3100868330 /* Actions.sks */,
-				6B6FC6872A8BAA3100868330 /* GameScene.swift */,
-				6B5E357F2A9618D700953699 /* Isolation.swift */,
-				6B31818D2A90EDAA006B5227 /* points.swift */,
-				6B31816F2A8F59CF006B5227 /* Objects.swift */,
-				6B1FAA862A95003900772ADE /* Level.swift */,
-				6B1FAA7F2A9246EA00772ADE /* TextureForObjects.swift */,
-				6B6FC6892A8BAA3100868330 /* GameViewController.swift */,
-				6B1966032A954CB400606CA4 /* ShopViewController.swift */,
-				6B6FC68B2A8BAA3100868330 /* Main.storyboard */,
-				6B1966012A9549B000606CA4 /* AboutViewController.swift */,
-				6B1965FF2A95440400606CA4 /* MainViewController.swift */,
-				6B6FC68E2A8BAA3500868330 /* Assets.xcassets */,
-				6B6FC6902A8BAA3500868330 /* LaunchScreen.storyboard */,
-				6B1FAA812A94EA6300772ADE /* ITC Bauhaus Heavy.ttf */,
 			);
 			path = "Magical sorting";
 			sourceTree = "<group>";
@@ -158,11 +199,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BF152332A967F5800310270 /* small.mp3 in Resources */,
 				6B6FC68D2A8BAA3100868330 /* Main.storyboard in Resources */,
 				6B6FC6842A8BAA3100868330 /* GameScene.sks in Resources */,
 				6B6FC68F2A8BAA3500868330 /* Assets.xcassets in Resources */,
 				6B1FAA822A94EA6300772ADE /* ITC Bauhaus Heavy.ttf in Resources */,
 				6B6FC6922A8BAA3500868330 /* LaunchScreen.storyboard in Resources */,
+				6BF152322A967F5800310270 /* background.mp3 in Resources */,
 				6B6FC6862A8BAA3100868330 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BF152372A968BBE00310270 /* MusicPlayer.swift in Sources */,
 				6B1FAA802A9246EA00772ADE /* TextureForObjects.swift in Sources */,
 				6B1FAA872A95003900772ADE /* Level.swift in Sources */,
 				6B1966042A954CB400606CA4 /* ShopViewController.swift in Sources */,
