@@ -89,7 +89,7 @@ class GameScene: SKScene {
         }
        
         
-        print(level)
+    
         numberCount = 5
         createGameArray()
         createObject()
@@ -353,6 +353,8 @@ class GameScene: SKScene {
             }
         }
     }
+    
+    
     func chekIsolate()->[SKSpriteNode]{
         var array = [SKSpriteNode]()
         for cellArray in cellArray {
@@ -410,12 +412,6 @@ class GameScene: SKScene {
                                 self.currentNode = node
                                 oldPosition = node.position
                         
-                            
-                            
-                            
-                            
-                            
-                           
                         }
                     }
                 }
@@ -423,6 +419,7 @@ class GameScene: SKScene {
             }
         }
     }
+    
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         //checkLocation()
@@ -433,6 +430,7 @@ class GameScene: SKScene {
            
         }
     }
+    
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -487,6 +485,7 @@ class GameScene: SKScene {
         newPosition = nil
         oldPosition = nil
     }
+    
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         checkLocation()
